@@ -1,0 +1,41 @@
+## Configuracion de Spring
+spring:
+    application:
+        name: ms-inventory-books-orders
+    datasource:
+        url: ${DB_URL:jdbc:mysql://localhost:3306/inventory-books-orders-db} 
+        driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
+        username: ${DB_USER:root} 
+        password: ${DB_PASSWORD:Admin2024SQL} 
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL8Dialect
+
+#swagger configuration
+springdoc:
+    api-docs:
+        enabled: true
+    swagger-ui: 
+        enabled: true
+        path: /swagger-ui.html
+        
+## Configuracion de Instancia
+server:
+    port: 8089
+
+## Configuracion del cliente de Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+    hostname: ms-inventory-books-orders
+   
+## Configuracion secundaria (custom)
+getBook:
+  url: http://ms-inventory-books/books/%s
